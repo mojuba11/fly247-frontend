@@ -14,9 +14,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    setLoading(true); // Prevent double-submission and indicate activity
-
-    console.log("Submitting login for:", formData.email);
+    setLoading(true);
 
     const result = loginSchema.safeParse(formData);
     if (!result.success) {
@@ -31,8 +29,6 @@ export default function LoginPage() {
 
     try {
       const response = await api.post("/api/auth/login", result.data);
-      console.log("Login successful, received:", response.data);
-      
       localStorage.setItem("user", JSON.stringify(response.data));
 
       if (response.data.role === "admin") {
@@ -41,7 +37,6 @@ export default function LoginPage() {
         router.push("/user/profile");
       }
     } catch (err: any) {
-      console.error("Login failed:", err.response?.data || err.message);
       setErrors({ 
         general: err.response?.data?.message || "Connection failed. Ensure the backend is running on port 5000." 
       });
@@ -58,7 +53,15 @@ export default function LoginPage() {
         </div>
         
         <div className="p-12 w-full md:w-1/2">
-          <h2 className="text-2xl font-bold mb-8">Login</h2>
+          {/* LOGO SECTION REPLACES "Login" HEADER */}
+          <div className="mb-8">
+            <img 
+              src="/path-to-your-logo.png" 
+              alt="Logo" 
+              className="h-12 w-auto" 
+            />
+          </div>
+          
           {errors.general && <div className="p-3 mb-4 bg-red-50 text-red-600 rounded-lg text-sm">{errors.general}</div>}
           
           <form onSubmit={handleSubmit} className="space-y-6">
