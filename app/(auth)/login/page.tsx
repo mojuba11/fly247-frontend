@@ -53,12 +53,12 @@ export default function LoginPage() {
         </div>
         
         <div className="p-12 w-full md:w-1/2">
-          {/* LOGO SECTION REPLACES "Login" HEADER */}
+          {/* LOGO SECTION */}
           <div className="mb-8">
             <img 
-              src="/path-to-your-logo.png" 
-              alt="Logo" 
-              className="h-12 w-auto" 
+              src="/fly247logo5.jpeg" 
+              alt="Fly247 Logo" 
+              className="h-16 w-auto object-contain" 
             />
           </div>
           
