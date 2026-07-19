@@ -53,12 +53,12 @@ export default function LoginPage() {
         </div>
         
         <div className="p-12 w-full md:w-1/2">
-          {/* LOGO SECTION */}
-          <div className="mb-8">
+          {/* CENTERED AND ENLARGED LOGO SECTION */}
+          <div className="mb-8 flex justify-center">
             <img 
               src="/images/fly247logo5.jpeg" 
               alt="Fly247 Logo" 
-              className="h-16 w-auto object-contain" 
+              className="h-24 w-auto object-contain" 
             />
           </div>
           
