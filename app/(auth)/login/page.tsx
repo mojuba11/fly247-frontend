@@ -56,7 +56,7 @@ export default function LoginPage() {
           {/* LOGO SECTION */}
           <div className="mb-8">
             <img 
-              src="/fly247logo5.jpeg" 
+              src="/images/fly247logo5.jpeg" 
               alt="Fly247 Logo" 
               className="h-16 w-auto object-contain" 
             />
