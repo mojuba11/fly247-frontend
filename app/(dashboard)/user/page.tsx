@@ -2,9 +2,17 @@
 import { useEffect, useState } from 'react';
 import api from '@/lib/api'; // Ensure your axios/api instance is set up
 
+// 1. Define the Booking interface
+interface Booking {
+  _id: string;
+  paymentReference: string;
+  status: string;
+}
+
 export default function UserDashboard() {
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // 2. Apply the interface to the state definition
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Fetch bookings specifically for the logged-in user
