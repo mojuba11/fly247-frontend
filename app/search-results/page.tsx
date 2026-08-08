@@ -4,10 +4,10 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from "@/components/layout/Navbar";
 import { Plane, Calendar, Clock, Briefcase, Users, ArrowRight, AlertCircle } from 'lucide-react';
-import { useBooking } from '@/context/bookingContext';
+import { useBooking } from '@/context/BookingContext'; // Check exact casing: BookingContext
 import { searchFlights } from '@/lib/api';
-import BookingModal from '../ui/BookingModal';
-import FlightSearchBar from '../ui/FlightSearchBar';
+import BookingModal from '@/app/ui/BookingModal';    // Adjust to match your exact folder (e.g. app/ui or components/ui)
+import FlightSearchBar from '@/app/ui/FlightSearchBar';
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -17,7 +17,6 @@ function SearchResultsContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Capturing search parameters
   const fromParam = searchParams.get('from') || searchParams.get('origin') || 'LOS';
   const toParam = searchParams.get('to') || searchParams.get('destination') || 'LHR';
   const dateParam = searchParams.get('date') || new Date().toISOString().split('T')[0];
@@ -65,7 +64,6 @@ function SearchResultsContent() {
         <FlightSearchBar />
       </div>
 
-      {/* Search Summary Header */}
       <div className="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mt-6">
         <h1 className="text-2xl font-extrabold text-flyBlue">Available Flights</h1>
         <div className="flex flex-wrap gap-4 mt-4 text-gray-600 text-sm">
@@ -78,7 +76,6 @@ function SearchResultsContent() {
         </div>
       </div>
       
-      {/* Loading State */}
       {loading && (
         <div className="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 text-center space-y-4">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-flyOrange mx-auto"></div>
@@ -86,7 +83,6 @@ function SearchResultsContent() {
         </div>
       )}
 
-      {/* Error State */}
       {error && !loading && (
         <div className="bg-red-50 border border-red-200 p-6 rounded-2xl text-center text-red-600 flex flex-col items-center gap-2">
           <AlertCircle size={24} />
@@ -94,7 +90,6 @@ function SearchResultsContent() {
         </div>
       )}
 
-      {/* Empty State */}
       {!loading && !error && flights.length === 0 && (
         <div className="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 text-center text-gray-500">
           <p className="text-lg font-semibold">No flights available for this search.</p>
@@ -102,7 +97,6 @@ function SearchResultsContent() {
         </div>
       )}
 
-      {/* Live Flight Results List */}
       {!loading && flights.length > 0 && (
         <div className="space-y-4">
           {flights.map((flight, index) => (
