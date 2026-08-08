@@ -1,3 +1,5 @@
+// Folder: lib/api.ts 
+
 import axios from 'axios';
 
 const api = axios.create({
@@ -48,6 +50,20 @@ export const verifyPaymentTransaction = async (reference: string) => {
 // 4. Reserve flight and generate PNR (requires verified payment reference)
 export const reserveFlightBooking = async (reservationData: Record<string, any>) => {
   const response = await api.post('/api/flights/reserve', reservationData);
+  return response.data;
+};
+
+// --- Admin Dashboard API Helper Functions ---
+
+// 5. Fetch all enterprise bookings for Admin
+export const fetchAdminBookings = async () => {
+  const response = await api.get('/api/admin/bookings');
+  return response.data;
+};
+
+// 6. Fetch all payment transactions for Admin
+export const fetchAdminTransactions = async () => {
+  const response = await api.get('/api/admin/transactions');
   return response.data;
 };
 
