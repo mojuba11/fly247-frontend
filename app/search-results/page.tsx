@@ -18,7 +18,7 @@ function SearchResultsContent() {
   const [error, setError] = useState('');
 
   // Capturing search parameters
-  const fromParam = searchParams.get('from' ) || searchParams.get('origin') || 'LOS';
+  const fromParam = searchParams.get('from') || searchParams.get('origin') || 'LOS';
   const toParam = searchParams.get('to') || searchParams.get('destination') || 'LHR';
   const dateParam = searchParams.get('date') || new Date().toISOString().split('T')[0];
   const classTypeParam = searchParams.get('classType') || 'Economy';
