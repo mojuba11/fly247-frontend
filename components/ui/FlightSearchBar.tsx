@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MapPin, Calendar, ArrowRightLeft } from 'lucide-react';
@@ -20,7 +21,7 @@ export default function FlightSearchBar() {
     // Validation Logic
     const today = new Date().toISOString().split('T')[0];
     
-    if (formData.date < today) {
+    if (formData.date && formData.date < today) {
       alert("Please select a date from today onwards.");
       return;
     }
@@ -30,9 +31,9 @@ export default function FlightSearchBar() {
       return;
     }
 
-    // Proceed with search
+    // Proceed with search (matching /flight route)
     const query = new URLSearchParams(formData as any).toString();
-    router.push(`/flights?${query}`);
+    router.push(`/flight?${query}`);
   };
 
   return (
@@ -85,9 +86,10 @@ export default function FlightSearchBar() {
           <MapPin className="text-flyOrange mr-2 shrink-0" size={20} />
           <input 
             required 
-            placeholder="From" 
-            className="w-full outline-none text-gray-900 placeholder:text-gray-400 bg-transparent" 
-            onChange={(e) => setFormData({...formData, origin: e.target.value})} 
+            placeholder="From (e.g. LOS)" 
+            value={formData.origin}
+            className="w-full outline-none text-gray-900 placeholder:text-gray-400 bg-transparent uppercase" 
+            onChange={(e) => setFormData({...formData, origin: e.target.value.toUpperCase()})} 
           />
         </div>
         
@@ -101,9 +103,10 @@ export default function FlightSearchBar() {
           <MapPin className="text-flyOrange mr-2 shrink-0" size={20} />
           <input 
             required 
-            placeholder="To" 
-            className="w-full outline-none text-gray-900 placeholder:text-gray-400 bg-transparent" 
-            onChange={(e) => setFormData({...formData, destination: e.target.value})} 
+            placeholder="To (e.g. LHR)" 
+            value={formData.destination}
+            className="w-full outline-none text-gray-900 placeholder:text-gray-400 bg-transparent uppercase" 
+            onChange={(e) => setFormData({...formData, destination: e.target.value.toUpperCase()})} 
           />
         </div>
 
@@ -114,6 +117,7 @@ export default function FlightSearchBar() {
             required 
             type="date" 
             min={new Date().toISOString().split('T')[0]}
+            value={formData.date}
             className="w-full outline-none text-gray-900 bg-transparent" 
             onChange={(e) => setFormData({...formData, date: e.target.value})} 
           />
@@ -122,7 +126,7 @@ export default function FlightSearchBar() {
         {/* Search Button */}
         <button 
           type="submit" 
-          className="md:col-span-2 bg-flyOrange text-white font-black py-4 rounded-lg hover:bg-orange-600 transition text-lg w-full"
+          className="md:col-span-2 bg-flyOrange text-white font-black py-4 rounded-lg hover:bg-orange-600 transition text-lg w-full cursor-pointer"
         >
           SEARCH
         </button>
