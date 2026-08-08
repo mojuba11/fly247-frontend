@@ -31,8 +31,8 @@ export default function HeroSearchBox() {
       classType: searchData.classType,
     }).toString();
 
-    // 3. Perform Navigation
-    router.push(`/search-results?${query}`);
+    // 3. Perform Navigation to your /flight page
+    router.push(`/flight?${query}`);
   };
 
   return (
