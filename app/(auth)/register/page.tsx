@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { UserPlus, AlertCircle } from 'lucide-react';
-import { registerUser } from '@/lib/api'; // Or your custom registration API function
+import api from '@/lib/api'; // Fixed import to use default api client instance
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -22,7 +22,6 @@ export default function RegisterPage() {
     setError('');
 
     try {
-      // Split full name for APIs expecting first and last name if needed
       const nameParts = formData.fullName.trim().split(' ');
       const firstName = nameParts[0] || 'User';
       const lastName = nameParts.slice(1).join(' ') || 'Member';
@@ -35,14 +34,14 @@ export default function RegisterPage() {
         password: formData.password
       };
 
-      // Call your backend API registration function
-      const response = await registerUser(payload);
+      // Corrected API call using api.post instead of a missing registerUser function
+      const response = await api.post('/api/auth/register', payload);
+      const data = response.data;
 
-      if (response && (response.success || response.token || response.data)) {
-        // Redirect to login or user dashboard upon successful registration
+      if (response && (data.success || data.token || data.data || response.status === 201 || response.status === 200)) {
         router.push('/login?registered=true');
       } else {
-        throw new Error(response?.message || 'Registration failed. Please try again.');
+        throw new Error(data?.message || 'Registration failed. Please try again.');
       }
     } catch (err: any) {
       console.error("Registration error:", err);
