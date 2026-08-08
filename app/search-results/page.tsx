@@ -4,10 +4,10 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from "@/components/layout/Navbar";
 import { Plane, Calendar, Clock, Briefcase, Users, ArrowRight, AlertCircle } from 'lucide-react';
-import { useBooking } from '@/context/BookingContext';
+import { useBooking } from '@/context/bookingContext';
 import { searchFlights } from '@/lib/api';
-import BookingModal from '@/components/BookingModal';
-import FlightSearchBar from '@/components/FlightSearchBar';
+import BookingModal from '../ui/BookingModal';
+import FlightSearchBar from '../ui/FlightSearchBar';
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
