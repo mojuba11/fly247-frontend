@@ -6,8 +6,8 @@ import Navbar from "@/components/layout/Navbar";
 import { Plane, Calendar, Clock, Briefcase, Users, ArrowRight, AlertCircle } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 import { searchFlights } from '@/lib/api';
-import BookingModal from '@/ui/BookingModal';
-import FlightSearchBar from '@/ui/FlightSearchBar';
+import BookingModal from '@/components/BookingModal';
+import FlightSearchBar from '@/components/FlightSearchBar';
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -41,7 +41,7 @@ function SearchResultsContent() {
         const response = await searchFlights(payload);
 
         if (response && response.success && response.data?.flights) {
-          setFlights(response.data.flights); // Contains your 5% markup prices!
+          setFlights(response.data.flights);
         } else if (response && response.flights) {
           setFlights(response.flights);
         } else {
