@@ -1,5 +1,7 @@
 "use client";
 
+// Folder: app/ui/BookingModal.tsx
+
 import { useState } from 'react';
 import { useBooking } from '@/context/BookingContext';
 import { verifyFlightPricing, verifyPaymentTransaction, reserveFlightBooking } from '@/lib/api';
